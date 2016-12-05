@@ -10,14 +10,21 @@ class Man(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.screen = screen
         self.speedx = 10
-        self.speedy = 5
+        self.speedy = 10
 
 
     def up(self):
         if self.rect.top < self.screen.get_height():
             self.rect.bottom -= self.speedy
 
-
+    def down(self):
+        """
+        moves mouth down
+        :param: none
+        :return: none
+        """
+        if self.rect.bottom < self.screen.get_height():
+            self.rect.bottom += self.speedy
 
     def left(self):
         """
@@ -38,8 +45,7 @@ class Man(pygame.sprite.Sprite):
             self.rect.left += self.speedx
 
 
-    def collide_botoom(self, spriteGroup):
-        if pygame.sprite.spritecollide(self, spriteGroup, False):
-            self.rect.bottom -= self.speedy
+
+
 
 
