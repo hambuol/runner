@@ -2,6 +2,7 @@ import pygame,sys
 import man
 import ground
 import enemy
+import bottom
 import random
 import time
 from pygame.locals import *
@@ -15,21 +16,18 @@ def main():
 
     manGroup = pygame.sprite.Group()
     myman = man.Man(mainsurface)
-    myman.rect.topleft = (50, 400)
+    myman.rect.bottomleft = (0, SCREEN_HEIGHT + 15 )
     myman.add(manGroup)
     mainsurface.blit(myman.image, myman.rect)
 
+
+    bottomGroup = pygame.sprite.Group()
+    thebottom = bottom.Bottom(mainsurface)
+    thebottom.rect.topleft = (0,490)
+    thebottom.add(bottomGroup)
+    mainsurface.blit(thebottom.image, thebottom.rect)
+
     groundGroup = pygame.sprite.Group()
-
-
-
-
-
-
-
-
-
-
 
 
     while True:
@@ -38,23 +36,37 @@ def main():
                 pygame.quit()
                 sys.exit()
         for x in range(1):
-            ypos = random.randint(0,500)
+            ypos = random.randint(0,4000)
             xpos = random.randint(600, 1000)
             myground = ground.Ground(mainsurface)
             myground.rect.topleft = (xpos, ypos)
             myground.add(groundGroup)
             mainsurface.blit(myground.image, myground.rect)
 
+        pressed = pygame.key.get_pressed()
+        # moves mouth if key is pressed
+        if pressed[pygame.K_LEFT]:
+            myman.left()
+
+        if pressed[pygame.K_RIGHT]:
+            myman.right()
+
+        if pressed[pygame.K_SPACE]:
+            myman.up()
+
+        if myman.collide_botoom(bottomGroup) == False:
+            thebottom.remove(bottomGroup)
+
 
         clock = pygame.time.Clock()
-        clock.tick(50)
+        clock.tick(30)
         mainsurface.fill(WHITE)
 
         for myground in groundGroup:
             mainsurface.blit(myground.image, myground.rect)
             myground.update()
         mainsurface.blit(myman.image, myman.rect)
-
+        mainsurface.blit(thebottom.image, thebottom.rect)
         pygame.display.update()
 
 main()

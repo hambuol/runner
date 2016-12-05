@@ -10,12 +10,36 @@ class Man(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.screen = screen
         self.speedx = 10
-        self.speedy = 10
-        #self.jump = pygame.mixer.Sound("")
+        self.speedy = 5
 
 
-    def jump(self):
-        pass
+    def up(self):
+        if self.rect.top < self.screen.get_height():
+            self.rect.bottom -= self.speedy
 
-    def double_jump(self):
-        pass
+
+
+    def left(self):
+        """
+        moves mouth left
+        :param: none
+        :return: none
+        """
+        if self.rect.left > 0:
+            self.rect.left -= self.speedx
+
+    def right(self):
+        """
+        moves mouth right
+        :param: none
+        :return: none
+        """
+        if self.rect.right < self.screen.get_width():
+            self.rect.left += self.speedx
+
+
+    def collide_botoom(self, spriteGroup):
+        if pygame.sprite.spritecollide(self, spriteGroup, False):
+            self.rect.bottom -= self.speedy
+
+
