@@ -40,6 +40,7 @@ def main():
             xpos = random.randint(600, 2000)
             myground = ground.Ground(mainsurface)
             myground.rect.topleft = (xpos, ypos)
+            myground.rect.bottomleft = (xpos, ypos)
             myground.add(groundGroup)
             mainsurface.blit(myground.image, myground.rect)
 
@@ -58,7 +59,6 @@ def main():
         myman.collide_botoom(bottomGroup)
         myman.collide_ground(groundGroup)
 
-
         clock = pygame.time.Clock()
         clock.tick(30)
         mainsurface.fill(WHITE)
@@ -69,6 +69,7 @@ def main():
         mainsurface.blit(myman.image, myman.rect)
         for thebottom in bottomGroup:
             mainsurface.blit(thebottom.image, thebottom.rect)
+
         pygame.display.update()
 
 main()

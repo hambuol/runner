@@ -6,7 +6,7 @@ class Ground(pygame.sprite.Sprite):
 
     def __init__(self, screen):
         super().__init__()
-        self.width = 100
+        self.width = 70
         self.height = 10
         self.image = pygame.Surface((self.width, self.height))
         self.rect = self.image.get_rect()

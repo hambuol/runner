@@ -9,13 +9,13 @@ class Man(pygame.sprite.Sprite):
         self.image = pygame.Surface((7, 7))
         self.rect = self.image.get_rect()
         self.screen = screen
-        self.speedx = 10
+        self.speedx = 14
         self.speedy = 7
 
 
     def jump(self):
         if self.rect.top < self.screen.get_height():
-            self.rect.bottom -= self.speedy + 20
+            self.rect.bottom -= self.speedy + 70
 
 
     def left(self):
@@ -51,7 +51,10 @@ class Man(pygame.sprite.Sprite):
 
     def collide_ground(self, spritegroup):
         if pygame.sprite.spritecollide(self, spritegroup, False):
-            self.rect.bottom -= 7
+            self.rect.top -= 7
+            
+
+
 
 
 
