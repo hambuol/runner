@@ -16,7 +16,7 @@ def main():
 
     manGroup = pygame.sprite.Group()
     myman = man.Man(mainsurface)
-    myman.rect.bottomleft = (0, SCREEN_HEIGHT - 20 )
+    myman.rect.topleft = (50, -1000)
     myman.add(manGroup)
     mainsurface.blit(myman.image, myman.rect)
 
@@ -36,8 +36,8 @@ def main():
                 pygame.quit()
                 sys.exit()
         for x in range(1):
-            ypos = random.randint(0,4000)
-            xpos = random.randint(600, 1000)
+            ypos = random.randint(0,5000)
+            xpos = random.randint(600, 2000)
             myground = ground.Ground(mainsurface)
             myground.rect.topleft = (xpos, ypos)
             myground.add(groundGroup)
@@ -51,13 +51,13 @@ def main():
         if pressed[pygame.K_RIGHT]:
             myman.right()
 
-        if pressed[pygame.K_UP]:
-            myman.up()
+        if pressed[pygame.K_SPACE]:
+            myman.jump()
 
-        if pressed[pygame.K_DOWN]:
-            myman.down()
+        myman.gravity()
+        myman.collide_botoom(bottomGroup)
+        myman.collide_ground(groundGroup)
 
-        thebottom.collide_botoom(manGroup)
 
         clock = pygame.time.Clock()
         clock.tick(30)

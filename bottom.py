@@ -12,6 +12,5 @@ class Bottom(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.screen = screen
 
-    def collide_botoom(self, spriteGroup):
-        if pygame.sprite.spritecollide(self, spriteGroup, False):
-            print("hi")
+
+

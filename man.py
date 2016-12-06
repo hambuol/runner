@@ -1,4 +1,4 @@
-import pygame
+import pygame, sys
 
 
 class Man(pygame.sprite.Sprite):
@@ -6,25 +6,17 @@ class Man(pygame.sprite.Sprite):
 
     def __init__(self, screen):
         super().__init__()
-        self.image = pygame.image.load("apple.jpg")
+        self.image = pygame.Surface((7, 7))
         self.rect = self.image.get_rect()
         self.screen = screen
         self.speedx = 10
-        self.speedy = 10
+        self.speedy = 7
 
 
-    def up(self):
+    def jump(self):
         if self.rect.top < self.screen.get_height():
-            self.rect.bottom -= self.speedy
+            self.rect.bottom -= self.speedy + 20
 
-    def down(self):
-        """
-        moves mouth down
-        :param: none
-        :return: none
-        """
-        if self.rect.bottom < self.screen.get_height():
-            self.rect.bottom += self.speedy
 
     def left(self):
         """
@@ -44,6 +36,22 @@ class Man(pygame.sprite.Sprite):
         if self.rect.right < self.screen.get_width():
             self.rect.left += self.speedx
 
+    def gravity(self):
+        if self.rect.bottom < 495:
+            self.rect.bottom += self.speedy
+
+
+
+    def collide_botoom(self, spriteGroup):
+        if pygame.sprite.spritecollide(self, spriteGroup, False):
+            pygame.quit()
+            sys.exit()
+
+
+
+    def collide_ground(self, spritegroup):
+        if pygame.sprite.spritecollide(self, spritegroup, False):
+            self.rect.bottom -= 7
 
 
 
