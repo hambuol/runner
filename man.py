@@ -6,7 +6,7 @@ class Man(pygame.sprite.Sprite):
 
     def __init__(self, screen):
         super().__init__()
-        self.image = pygame.Surface((7, 7))
+        self.image = pygame.image.load("ship.jpg")
         self.rect = self.image.get_rect()
         self.screen = screen
         self.speedx = 14
@@ -15,7 +15,7 @@ class Man(pygame.sprite.Sprite):
 
     def jump(self):
         if self.rect.top < self.screen.get_height():
-            self.rect.bottom -= self.speedy + 70
+            self.rect.bottom -= self.speedy + 100
 
 
     def left(self):
@@ -36,6 +36,24 @@ class Man(pygame.sprite.Sprite):
         if self.rect.right < self.screen.get_width():
             self.rect.left += self.speedx
 
+    def up(self):
+        """
+        moves mouth up
+        :param: none
+        :return:none
+        """
+        if self.rect.top > 0:
+            self.rect.top -= self.speedy
+
+    def down(self):
+        """
+        moves mouth down
+        :param: none
+        :return: none
+        """
+        if self.rect.bottom < self.screen.get_height():
+            self.rect.bottom += self.speedy
+
     def gravity(self):
         if self.rect.bottom < 495:
             self.rect.bottom += self.speedy
@@ -49,12 +67,17 @@ class Man(pygame.sprite.Sprite):
 
 
 
-    def collide_ground(self, spritegroup):
-        if pygame.sprite.spritecollide(self, spritegroup, False):
-            self.rect.top -= 7
+    def collide_ground(self, spriteGroup):
+        if pygame.sprite.spritecollide(self, spriteGroup, False):
+            pygame.quit()
+            sys.exit()
             
 
 
+    def collide_enemy(self, spriteGroup):
+        if pygame.sprite.spritecollide(self, spriteGroup, False):
+            pygame.quit()
+            sys.exit()
 
 
 

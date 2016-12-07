@@ -6,12 +6,12 @@ class Ground(pygame.sprite.Sprite):
 
     def __init__(self, screen):
         super().__init__()
-        self.width = 70
+        self.width = 80
         self.height = 10
-        self.image = pygame.Surface((self.width, self.height))
+        self.image = pygame.image.load("asteroid.png")
         self.rect = self.image.get_rect()
         self.screen = screen
-        self.speedx = 3
+        self.speedx = 7
         self.speedy = 3
 
 
