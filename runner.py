@@ -56,7 +56,7 @@ def main():
                     thebottom.add(bottomGroup)
 
         for x in range(1):
-            ypos = random.randint(0, 1000)
+            ypos = random.randint(0, 3000)
             xpos = random.randint(700, 3000)
             myground = ground.Ground(mainsurface)
             myground.rect.topleft = (xpos, ypos)
