@@ -60,11 +60,6 @@ class Man(pygame.sprite.Sprite):
 
 
 
-    def collide_botoom(self, spriteGroup):
-        if pygame.sprite.spritecollide(self, spriteGroup, False):
-            pygame.quit()
-            sys.exit()
-
 
 
     def collide_ground(self, spriteGroup):

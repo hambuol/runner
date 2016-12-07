@@ -31,16 +31,17 @@ def main():
 
 
     bottomGroup = pygame.sprite.Group()
-    thebottom = bottom.Bottom(mainsurface)
-    thebottom.rect.topleft = (0,490)
-    thebottom.add(bottomGroup)
-    mainsurface.blit(thebottom.image, thebottom.rect)
+    thebottom = bottom.Bottom(mainsurface, RED)
+    #thebottom.rect.topleft = (55, 270)
+    #thebottom.add(bottomGroup)
+
 
     ememyGroup = pygame.sprite.Group()
 
 
 
     groundGroup = pygame.sprite.Group()
+
 
 
     while True:
@@ -51,9 +52,11 @@ def main():
             if (event.type == pygame.KEYDOWN):
 
                 if (event.key == pygame.K_SPACE):
-                    myman.jump()
+                    thebottom.rect.topleft = (myman.rect.left + 5,myman.rect.top + 20)
+                    thebottom.add(bottomGroup)
+
         for x in range(1):
-            ypos = random.randint(0, 5000)
+            ypos = random.randint(0, 1000)
             xpos = random.randint(700, 3000)
             myground = ground.Ground(mainsurface)
             myground.rect.topleft = (xpos, ypos)
@@ -68,23 +71,31 @@ def main():
             myenemy.add(ememyGroup)
             mainsurface.blit(myenemy.image, myenemy.rect)
 
+
+
         pressed = pygame.key.get_pressed()
         # moves mouth if key is pressed
         if pressed[pygame.K_LEFT]:
             myman.left()
 
+
         if pressed[pygame.K_RIGHT]:
             myman.right()
 
+
         if pressed[pygame.K_UP]:
             myman.up()
+
 
         if pressed[pygame.K_DOWN]:
             myman.down()
 
 
-        #myman.gravity()
-        myman.collide_botoom(bottomGroup)
+
+        thebottom.fire()
+
+        thebottom.collide_ground(groundGroup)
+
         myman.collide_ground(groundGroup)
         myman.collide_enemy(ememyGroup)
 
@@ -100,6 +111,7 @@ def main():
             mainsurface.blit(myground.image, myground.rect)
             myground.update()
         mainsurface.blit(myman.image, myman.rect)
+
         for thebottom in bottomGroup:
             mainsurface.blit(thebottom.image, thebottom.rect)
 
