@@ -1,6 +1,7 @@
 import pygame
 
 
+
 class Ground(pygame.sprite.Sprite):
     """class sets what is needed for mouth"""
 
@@ -11,12 +12,18 @@ class Ground(pygame.sprite.Sprite):
         self.image = pygame.image.load("asteroid.png")
         self.rect = self.image.get_rect()
         self.screen = screen
-        self.speedx = 7
+        self.speedx = 5
         self.speedy = 3
 
 
     def update(self):
         self.rect.left -= self.speedx
+
+
+
+
+
+
 
 
 

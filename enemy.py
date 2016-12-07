@@ -12,8 +12,9 @@ class Enemy(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.screen = screen
         self.speedx = 15
-        self.speedy = 3
+        self.speedy = 10
 
 
-    def update(self):
+    def update(self, spriteGroup):
         self.rect.left -= self.speedx
+        pygame.sprite.spritecollide(self, spriteGroup, True)
