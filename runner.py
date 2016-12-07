@@ -32,8 +32,6 @@ def main():
 
     bottomGroup = pygame.sprite.Group()
     thebottom = bottom.Bottom(mainsurface, RED)
-    #thebottom.rect.topleft = (55, 270)
-    #thebottom.add(bottomGroup)
 
 
     ememyGroup = pygame.sprite.Group()
@@ -52,25 +50,28 @@ def main():
             if (event.type == pygame.KEYDOWN):
 
                 if (event.key == pygame.K_SPACE):
-                    thebottom.rect.topleft = (myman.rect.left + 5,myman.rect.top + 20)
                     thebottom.add(bottomGroup)
+                    thebottom.rect.topleft = (myman.rect.left + 5, myman.rect.top + 20)
+
+        clock = pygame.time.Clock()
+        clock.tick(30)
+
 
         for x in range(1):
-            ypos = random.randint(0, 3000)
-            xpos = random.randint(700, 3000)
+            ypos = random.randint(0, 1200)
+            xpos = (900)
             myground = ground.Ground(mainsurface)
             myground.rect.topleft = (xpos, ypos)
             myground.add(groundGroup)
             mainsurface.blit(myground.image, myground.rect)
 
         for x in range(1):
-            ypose = random.randint(0,5000)
-            xpose = random.randint(850,9000)
+            ypose = random.randint(0,4000)
+            xpose = (900)
             myenemy = enemy.Enemy(mainsurface)
             myenemy.rect.topleft = (xpose, ypose)
             myenemy.add(ememyGroup)
             mainsurface.blit(myenemy.image, myenemy.rect)
-
 
 
         pressed = pygame.key.get_pressed()
@@ -91,25 +92,24 @@ def main():
             myman.down()
 
 
-
         thebottom.fire()
-
         thebottom.collide_ground(groundGroup)
+        myman.collide(groundGroup)
+        myman.collide(ememyGroup)
 
-        myman.collide_ground(groundGroup)
-        myman.collide_enemy(ememyGroup)
 
-        clock = pygame.time.Clock()
-        clock.tick(30)
+
+
         mainsurface.fill(WHITE)
         mainsurface.blit(mybackround.image, mybackround.rect)
         for myenemy in ememyGroup:
             mainsurface.blit(myenemy.image, myenemy.rect)
-            myenemy.update()
+            myenemy.update(groundGroup)
 
         for myground in groundGroup:
             mainsurface.blit(myground.image, myground.rect)
             myground.update()
+
         mainsurface.blit(myman.image, myman.rect)
 
         for thebottom in bottomGroup:

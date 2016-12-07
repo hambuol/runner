@@ -10,7 +10,7 @@ class Man(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.screen = screen
         self.speedx = 14
-        self.speedy = 7
+        self.speedy = 10
 
 
     def jump(self):
@@ -62,17 +62,15 @@ class Man(pygame.sprite.Sprite):
 
 
 
-    def collide_ground(self, spriteGroup):
+    def collide(self, spriteGroup):
         if pygame.sprite.spritecollide(self, spriteGroup, False):
             pygame.quit()
             sys.exit()
+
             
 
 
-    def collide_enemy(self, spriteGroup):
-        if pygame.sprite.spritecollide(self, spriteGroup, False):
-            pygame.quit()
-            sys.exit()
+
 
 
 
