@@ -1,7 +1,7 @@
 import pygame
 
 
-class Bottom(pygame.sprite.Sprite):
+class Fire(pygame.sprite.Sprite):
     """class sets what is needed for mouth"""
 
     def __init__(self, screen, color):
@@ -21,3 +21,4 @@ class Bottom(pygame.sprite.Sprite):
 
     def collide_ground(self, spriteGroup):
         pygame.sprite.spritecollide(self, spriteGroup, True)
+

@@ -16,11 +16,21 @@ class Ground(pygame.sprite.Sprite):
         self.speedy = 3
 
 
-    def update(self):
+    def update(self, spriteGroup):
         self.rect.left -= self.speedx
+        pygame.sprite.spritecollide(self, spriteGroup, True)
 
+class End(pygame.sprite.Sprite):
+        """class sets what is needed for mouth"""
 
-
+        def __init__(self, screen, color):
+            super().__init__()
+            self.width = 1
+            self.height = 500
+            self.image = pygame.Surface((self.width, self.height))
+            self.image.fill(color)
+            self.rect = self.image.get_rect()
+            self.screen = screen
 
 
 

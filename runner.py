@@ -2,7 +2,7 @@ import pygame,sys
 import man
 import ground
 import enemy
-import bottom
+import fire
 import backround
 import random
 import time
@@ -29,9 +29,14 @@ def main():
     myman.add(manGroup)
     mainsurface.blit(myman.image, myman.rect)
 
+    endGroup = pygame.sprite.Group()
+    myend = ground.End(mainsurface, RED)
+    myend.rect.topleft = (20,0)
+    myend.add(endGroup)
+    mainsurface.blit(myend.image, myend.rect)
 
-    bottomGroup = pygame.sprite.Group()
-    thebottom = bottom.Bottom(mainsurface, RED)
+    fireGroup = pygame.sprite.Group()
+    thefire = fire.Fire(mainsurface, RED)
 
 
     ememyGroup = pygame.sprite.Group()
@@ -50,28 +55,28 @@ def main():
             if (event.type == pygame.KEYDOWN):
 
                 if (event.key == pygame.K_SPACE):
-                    thebottom.add(bottomGroup)
-                    thebottom.rect.topleft = (myman.rect.left + 5, myman.rect.top + 20)
+                    thefire.add(fireGroup)
+                    thefire.rect.topleft = (myman.rect.left + 5, myman.rect.top + 20)
 
         clock = pygame.time.Clock()
         clock.tick(30)
 
 
-        for x in range(1):
-            ypos = random.randint(0, 1200)
-            xpos = (900)
-            myground = ground.Ground(mainsurface)
-            myground.rect.topleft = (xpos, ypos)
-            myground.add(groundGroup)
-            mainsurface.blit(myground.image, myground.rect)
 
-        for x in range(1):
-            ypose = random.randint(0,4000)
-            xpose = (900)
-            myenemy = enemy.Enemy(mainsurface)
-            myenemy.rect.topleft = (xpose, ypose)
-            myenemy.add(ememyGroup)
-            mainsurface.blit(myenemy.image, myenemy.rect)
+        ypos = random.randint(0, 1200)
+        xpos = (900)
+        myground = ground.Ground(mainsurface)
+        myground.rect.topleft = (xpos, ypos)
+        myground.add(groundGroup)
+        mainsurface.blit(myground.image, myground.rect)
+
+
+        ypose = random.randint(0,4000)
+        xpose = (900)
+        myenemy = enemy.Enemy(mainsurface)
+        myenemy.rect.topleft = (xpose, ypose)
+        myenemy.add(ememyGroup)
+        mainsurface.blit(myenemy.image, myenemy.rect)
 
 
         pressed = pygame.key.get_pressed()
@@ -92,29 +97,36 @@ def main():
             myman.down()
 
 
-        thebottom.fire()
-        thebottom.collide_ground(groundGroup)
+        thefire.fire()
+
+
+
         myman.collide(groundGroup)
         myman.collide(ememyGroup)
 
 
 
 
+
+
         mainsurface.fill(WHITE)
+
         mainsurface.blit(mybackround.image, mybackround.rect)
+        for myend in endGroup:
+            mainsurface.blit(myend.image, myend.rect)
         for myenemy in ememyGroup:
             mainsurface.blit(myenemy.image, myenemy.rect)
             myenemy.update(groundGroup)
 
         for myground in groundGroup:
             mainsurface.blit(myground.image, myground.rect)
-            myground.update()
+            myground.update(fireGroup)
 
         mainsurface.blit(myman.image, myman.rect)
+        for thefire in fireGroup:
+            mainsurface.blit(thefire.image, thefire.rect)
 
-        for thebottom in bottomGroup:
-            mainsurface.blit(thebottom.image, thebottom.rect)
-
+        thefire.collide_ground(groundGroup)
         pygame.display.update()
 
 main()
