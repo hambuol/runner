@@ -16,8 +16,11 @@ class Ground(pygame.sprite.Sprite):
         self.speedy = 3
 
 
-    def update(self, spriteGroup):
+    def update(self):
         self.rect.left -= self.speedx
+
+
+    def collide(self, spriteGroup):
         pygame.sprite.spritecollide(self, spriteGroup, True)
 
 class End(pygame.sprite.Sprite):
@@ -26,11 +29,14 @@ class End(pygame.sprite.Sprite):
         def __init__(self, screen, color):
             super().__init__()
             self.width = 1
-            self.height = 500
+            self.height = 8000
             self.image = pygame.Surface((self.width, self.height))
             self.image.fill(color)
             self.rect = self.image.get_rect()
             self.screen = screen
+
+        def collide(self, spriteGroup):
+            pygame.sprite.spritecollide(self, spriteGroup, True)
 
 
 

@@ -17,8 +17,9 @@ class Fire(pygame.sprite.Sprite):
 
 
     def fire(self):
-            self.rect.left += self.speedx
+        self.rect.left += self.speedx
 
     def collide_ground(self, spriteGroup):
-        pygame.sprite.spritecollide(self, spriteGroup, True)
+        if pygame.sprite.spritecollide(self, spriteGroup, True):
+            self.rect.top = 4000
 

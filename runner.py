@@ -31,12 +31,12 @@ def main():
 
     endGroup = pygame.sprite.Group()
     myend = ground.End(mainsurface, RED)
-    myend.rect.topleft = (20,0)
+    myend.rect.topleft = (20,-4000)
     myend.add(endGroup)
     mainsurface.blit(myend.image, myend.rect)
 
     fireGroup = pygame.sprite.Group()
-    thefire = fire.Fire(mainsurface, RED)
+    #thefire = fire.Fire(mainsurface, RED)
 
 
     ememyGroup = pygame.sprite.Group()
@@ -45,8 +45,7 @@ def main():
 
     groundGroup = pygame.sprite.Group()
 
-
-
+    clock = pygame.time.Clock()
     while True:
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -55,11 +54,15 @@ def main():
             if (event.type == pygame.KEYDOWN):
 
                 if (event.key == pygame.K_SPACE):
+                    thefire = fire.Fire(mainsurface, RED)
                     thefire.add(fireGroup)
                     thefire.rect.topleft = (myman.rect.left + 5, myman.rect.top + 20)
 
-        clock = pygame.time.Clock()
+
+
+
         clock.tick(30)
+        print(clock.get_fps())
 
 
 
@@ -96,16 +99,16 @@ def main():
         if pressed[pygame.K_DOWN]:
             myman.down()
 
-
-        thefire.fire()
-
-
-
-        myman.collide(groundGroup)
-        myman.collide(ememyGroup)
+        if len(fireGroup) == 1:
+            thefire.fire()
 
 
 
+        #myman.collide(groundGroup)
+        #myman.collide(ememyGroup)
+
+        myend.collide(ememyGroup)
+        myend.collide(groundGroup)
 
 
 
@@ -118,15 +121,19 @@ def main():
             mainsurface.blit(myenemy.image, myenemy.rect)
             myenemy.update(groundGroup)
 
+
         for myground in groundGroup:
             mainsurface.blit(myground.image, myground.rect)
-            myground.update(fireGroup)
+            myground.update()
+
 
         mainsurface.blit(myman.image, myman.rect)
         for thefire in fireGroup:
             mainsurface.blit(thefire.image, thefire.rect)
+        if len(fireGroup) == 1:
+            thefire.collide_ground(groundGroup)
+            thefire.remove(fireGroup)
 
-        thefire.collide_ground(groundGroup)
         pygame.display.update()
 
 main()
