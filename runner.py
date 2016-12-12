@@ -31,18 +31,15 @@ def main():
 
     endGroup = pygame.sprite.Group()
     myend = ground.End(mainsurface, RED)
-    myend.rect.topleft = (20,-4000)
+    myend.rect.topleft = (0,-4000)
     myend.add(endGroup)
     mainsurface.blit(myend.image, myend.rect)
 
     fireGroup = pygame.sprite.Group()
-    #thefire = fire.Fire(mainsurface, RED)
+
 
 
     ememyGroup = pygame.sprite.Group()
-
-
-
     groundGroup = pygame.sprite.Group()
 
     clock = pygame.time.Clock()
@@ -60,7 +57,6 @@ def main():
 
 
 
-
         clock.tick(30)
         print(clock.get_fps())
 
@@ -74,7 +70,7 @@ def main():
         mainsurface.blit(myground.image, myground.rect)
 
 
-        ypose = random.randint(0,4000)
+        ypose = random.randint(0,5000)
         xpose = (900)
         myenemy = enemy.Enemy(mainsurface)
         myenemy.rect.topleft = (xpose, ypose)
@@ -99,16 +95,16 @@ def main():
         if pressed[pygame.K_DOWN]:
             myman.down()
 
-        if len(fireGroup) == 1:
-            thefire.fire()
 
 
 
-        #myman.collide(groundGroup)
-        #myman.collide(ememyGroup)
+
+        myman.collide(groundGroup)
+        myman.collide(ememyGroup)
 
         myend.collide(ememyGroup)
         myend.collide(groundGroup)
+
 
 
 
@@ -120,6 +116,7 @@ def main():
         for myenemy in ememyGroup:
             mainsurface.blit(myenemy.image, myenemy.rect)
             myenemy.update(groundGroup)
+            myenemy.update(fireGroup)
 
 
         for myground in groundGroup:
@@ -130,9 +127,14 @@ def main():
         mainsurface.blit(myman.image, myman.rect)
         for thefire in fireGroup:
             mainsurface.blit(thefire.image, thefire.rect)
-        if len(fireGroup) == 1:
-            thefire.collide_ground(groundGroup)
-            thefire.remove(fireGroup)
+            thefire.fire()
+            if thefire.collide_ground(groundGroup):
+                thefire.remove(fireGroup)
+
+
+
+
+
 
         pygame.display.update()
 

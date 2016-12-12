@@ -11,8 +11,8 @@ class Enemy(pygame.sprite.Sprite):
         self.image = pygame.image.load("therocket.png")
         self.rect = self.image.get_rect()
         self.screen = screen
-        self.speedx = 15
-        self.speedy = 10
+        self.speedx = 7
+        self.speedy = 0
 
 
     def update(self, spriteGroup):

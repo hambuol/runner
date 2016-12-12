@@ -23,3 +23,7 @@ class Fire(pygame.sprite.Sprite):
         if pygame.sprite.spritecollide(self, spriteGroup, True):
             self.rect.top = 4000
 
+
+    def collide_enemy(self, spriteGroup):
+        if pygame.sprite.spritecollide(self, spriteGroup, True):
+            print("hi")

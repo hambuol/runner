@@ -29,7 +29,7 @@ class End(pygame.sprite.Sprite):
         def __init__(self, screen, color):
             super().__init__()
             self.width = 1
-            self.height = 8000
+            self.height = 10000
             self.image = pygame.Surface((self.width, self.height))
             self.image.fill(color)
             self.rect = self.image.get_rect()
