@@ -8,7 +8,7 @@ class Enemy(pygame.sprite.Sprite):
         super().__init__()
         self.width = 45
         self.height = 10
-        self.image = pygame.image.load("therocket.png")
+        self.image = pygame.image.load("rocket.png")
         self.rect = self.image.get_rect()
         self.screen = screen
         self.speedx = 7

@@ -67,7 +67,7 @@ def main():
                 if (event.key == pygame.K_SPACE):
                     thefire = fire.Fire(mainsurface, RED)
                     thefire.add(fireGroup)
-                    thefire.rect.topleft = (myman.rect.left + 5, myman.rect.top + 20)
+                    thefire.rect.topleft = (myman.rect.left + 5, myman.rect.top + 10)
 
 
 
