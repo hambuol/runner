@@ -4,6 +4,7 @@ import ground
 import enemy
 import fire
 import backround
+import score
 import random
 import time
 from pygame.locals import *
@@ -36,13 +37,26 @@ def main():
     mainsurface.blit(myend.image, myend.rect)
 
     fireGroup = pygame.sprite.Group()
+    thefire = fire.Fire(mainsurface, RED)
 
 
 
     ememyGroup = pygame.sprite.Group()
     groundGroup = pygame.sprite.Group()
-
     clock = pygame.time.Clock()
+    end_it = False
+    while (end_it == False):
+        mainsurface.fill(BLACK)
+        myfont = pygame.font.SysFont("Britannic Bold", 40)
+        nlabel = myfont.render("Click to start", 1, (255, 0, 0))
+        for event in pygame.event.get():
+            if event.type == MOUSEBUTTONDOWN:
+                end_it = True
+            elif event.type == QUIT:
+                pygame.quit()
+                sys.exit()
+        mainsurface.blit(nlabel, (300, 200))
+        pygame.display.flip()
     while True:
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -130,6 +144,12 @@ def main():
             thefire.fire()
             if thefire.collide_ground(groundGroup):
                 thefire.remove(fireGroup)
+
+
+
+        scorefont = pygame.font.SysFont("Britannic Bold", 40)
+        scorelable = scorefont.render("Score: {0}".format(thefire.the_score), 1, RED)
+        mainsurface.blit(scorelable, (10, 10))
 
 
 

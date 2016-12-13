@@ -1,4 +1,5 @@
 import pygame
+import score
 
 
 class Fire(pygame.sprite.Sprite):
@@ -14,6 +15,7 @@ class Fire(pygame.sprite.Sprite):
         self.screen = screen
         self.speedx = 40
         self.speedy = 0
+        self.the_score = score.Score()
 
 
     def fire(self):
@@ -22,8 +24,7 @@ class Fire(pygame.sprite.Sprite):
     def collide_ground(self, spriteGroup):
         if pygame.sprite.spritecollide(self, spriteGroup, True):
             self.rect.top = 4000
-
+            self.the_score.increase()
 
     def collide_enemy(self, spriteGroup):
-        if pygame.sprite.spritecollide(self, spriteGroup, True):
-            print("hi")
+        pygame.sprite.spritecollide(self, spriteGroup, True)
