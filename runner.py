@@ -40,10 +40,10 @@ def main():
     thefire = fire.Fire(mainsurface, RED)
 
 
-
     ememyGroup = pygame.sprite.Group()
     groundGroup = pygame.sprite.Group()
     clock = pygame.time.Clock()
+    points = 0
     end_it = False
     while (end_it == False):
         mainsurface.fill(BLACK)
@@ -55,6 +55,7 @@ def main():
             elif event.type == QUIT:
                 pygame.quit()
                 sys.exit()
+
         mainsurface.blit(nlabel, (300, 200))
         pygame.display.flip()
     while True:
@@ -71,8 +72,9 @@ def main():
 
 
 
+
         clock.tick(30)
-        print(clock.get_fps())
+        #print(clock.get_fps())
 
 
 
@@ -113,8 +115,8 @@ def main():
 
 
 
-        myman.collide(groundGroup)
-        myman.collide(ememyGroup)
+        #myman.collide(groundGroup)
+        #myman.collide(ememyGroup)
 
         myend.collide(ememyGroup)
         myend.collide(groundGroup)
@@ -123,6 +125,10 @@ def main():
 
 
         mainsurface.fill(WHITE)
+        scorefont = pygame.font.SysFont("Britannic Bold", 40)
+        scorelable = scorefont.render("Score: {0}".format(points), 1, RED)
+
+        points = thefire.the_score
 
         mainsurface.blit(mybackround.image, mybackround.rect)
         for myend in endGroup:
@@ -133,12 +139,14 @@ def main():
             myenemy.update(fireGroup)
 
 
+
+
         for myground in groundGroup:
             mainsurface.blit(myground.image, myground.rect)
             myground.update()
 
 
-        mainsurface.blit(myman.image, myman.rect)
+
         for thefire in fireGroup:
             mainsurface.blit(thefire.image, thefire.rect)
             thefire.fire()
@@ -146,10 +154,15 @@ def main():
                 thefire.remove(fireGroup)
 
 
-
-        scorefont = pygame.font.SysFont("Britannic Bold", 40)
-        scorelable = scorefont.render("Score: {0}".format(thefire.the_score), 1, RED)
+        mainsurface.blit(myman.image, myman.rect)
         mainsurface.blit(scorelable, (10, 10))
+
+
+
+
+
+
+
 
 
 
