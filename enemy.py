@@ -17,4 +17,6 @@ class Enemy(pygame.sprite.Sprite):
 
     def update(self, spriteGroup):
         self.rect.left -= self.speedx
-        pygame.sprite.spritecollide(self, spriteGroup, True)
+        if pygame.sprite.spritecollide(self, spriteGroup, True):
+            self.rect.left += 7
+

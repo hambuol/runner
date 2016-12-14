@@ -4,7 +4,7 @@ import ground
 import enemy
 import fire
 import backround
-import score
+import start_screen
 import random
 import time
 from pygame.locals import *
@@ -16,7 +16,7 @@ def main():
     RED = (255, 0, 0)
     pygame.init()
     mainsurface = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT), 0, 32)
-    pygame.display.set_caption("Runner")
+    pygame.display.set_caption("Star Runner")
 
     backroundGroup = pygame.sprite.Group()
     mybackround = backround.Backround(mainsurface)
@@ -42,21 +42,49 @@ def main():
 
     ememyGroup = pygame.sprite.Group()
     groundGroup = pygame.sprite.Group()
+    thefire = fire.Fire(mainsurface, RED)
     clock = pygame.time.Clock()
-    points = 0
     end_it = False
     while (end_it == False):
         mainsurface.fill(BLACK)
-        myfont = pygame.font.SysFont("Britannic Bold", 40)
-        nlabel = myfont.render("Click to start", 1, (255, 0, 0))
+        myfont = pygame.font.SysFont("Britannic Bold", 100)
+        slabel1 = myfont.render("Star Runner", 1, (255, 0, 0))
+        slabel2 = myfont.render("Click to Play", 1, (0, 0,255))
+
+        ypos = random.randint(0, 1200)
+        xpos = (900)
+        myground = ground.Ground(mainsurface)
+        myground.rect.topleft = (xpos, ypos)
+        myground.add(groundGroup)
+
+
+        ypose = random.randint(0, 5000)
+        xpose = (900)
+        myenemy = enemy.Enemy(mainsurface)
+        myenemy.rect.topleft = (xpose, ypose)
+        myenemy.add(ememyGroup)
+        mainsurface.blit(mybackround.image, mybackround.rect)
+        mainsurface.blit(slabel1, (200, 100))
+        mainsurface.blit(slabel2, (200, 200))
+
+        for myenemy in ememyGroup:
+            mainsurface.blit(myenemy.image, myenemy.rect)
+            myenemy.update(groundGroup)
+            myenemy.update(fireGroup)
+
+
+        for myground in groundGroup:
+            mainsurface.blit(myground.image, myground.rect)
+            myground.update()
+
+
         for event in pygame.event.get():
             if event.type == MOUSEBUTTONDOWN:
                 end_it = True
             elif event.type == QUIT:
                 pygame.quit()
                 sys.exit()
-
-        mainsurface.blit(nlabel, (300, 200))
+        pygame.display.update()
         pygame.display.flip()
     while True:
         for event in pygame.event.get():
@@ -66,7 +94,6 @@ def main():
             if (event.type == pygame.KEYDOWN):
 
                 if (event.key == pygame.K_SPACE):
-                    thefire = fire.Fire(mainsurface, RED)
                     thefire.add(fireGroup)
                     thefire.rect.topleft = (myman.rect.left + 5, myman.rect.top + 10)
 
@@ -115,20 +142,20 @@ def main():
 
 
 
-        #myman.collide(groundGroup)
-        #myman.collide(ememyGroup)
+        myman.collide(groundGroup)
+        myman.collide(ememyGroup)
 
         myend.collide(ememyGroup)
         myend.collide(groundGroup)
 
 
-
+        points = thefire.the_score
 
         mainsurface.fill(WHITE)
         scorefont = pygame.font.SysFont("Britannic Bold", 40)
         scorelable = scorefont.render("Score: {0}".format(points), 1, RED)
 
-        points = thefire.the_score
+
 
         mainsurface.blit(mybackround.image, mybackround.rect)
         for myend in endGroup:
@@ -139,11 +166,10 @@ def main():
             myenemy.update(fireGroup)
 
 
-
-
         for myground in groundGroup:
             mainsurface.blit(myground.image, myground.rect)
             myground.update()
+
 
 
 
@@ -152,8 +178,6 @@ def main():
             thefire.fire()
             if thefire.collide_ground(groundGroup):
                 thefire.remove(fireGroup)
-
-
         mainsurface.blit(myman.image, myman.rect)
         mainsurface.blit(scorelable, (10, 10))
 
