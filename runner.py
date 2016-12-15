@@ -46,6 +46,8 @@ def main():
     clock = pygame.time.Clock()
     end_it = False
     while (end_it == False):
+        #clock.tick(30)
+        #print(clock.get_fps())
         mainsurface.fill(BLACK)
         myfont = pygame.font.SysFont("Britannic Bold", 100)
         slabel1 = myfont.render("Star Runner", 1, (255, 0, 0))
@@ -67,19 +69,28 @@ def main():
         mainsurface.blit(slabel1, (200, 100))
         mainsurface.blit(slabel2, (200, 200))
 
+
+        for myend in endGroup:
+            mainsurface.blit(myend.image, myend.rect)
+
         for myenemy in ememyGroup:
             mainsurface.blit(myenemy.image, myenemy.rect)
             myenemy.update(groundGroup)
             myenemy.update(fireGroup)
 
-
         for myground in groundGroup:
             mainsurface.blit(myground.image, myground.rect)
             myground.update()
+        myend.collide(ememyGroup)
+        myend.collide(groundGroup)
 
 
         for event in pygame.event.get():
             if event.type == MOUSEBUTTONDOWN:
+                for myenemy in ememyGroup:
+                    myenemy.remove(ememyGroup)
+                for myground in groundGroup:
+                    myground.remove(groundGroup)
                 end_it = True
             elif event.type == QUIT:
                 pygame.quit()
@@ -94,15 +105,15 @@ def main():
             if (event.type == pygame.KEYDOWN):
 
                 if (event.key == pygame.K_SPACE):
-                    thefire.add(fireGroup)
-                    thefire.rect.topleft = (myman.rect.left + 5, myman.rect.top + 10)
-
-
+                        thefire.add(fireGroup)
+                        #if len(fireGroup) >= 1:
+                            #print("hi")
+                        thefire.rect.topleft = (myman.rect.left + 5, myman.rect.top + 10)
 
 
         clock.tick(30)
         #print(clock.get_fps())
-
+        print(len(fireGroup))
 
 
         ypos = random.randint(0, 1200)
@@ -169,9 +180,6 @@ def main():
         for myground in groundGroup:
             mainsurface.blit(myground.image, myground.rect)
             myground.update()
-
-
-
 
         for thefire in fireGroup:
             mainsurface.blit(thefire.image, thefire.rect)
