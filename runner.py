@@ -46,8 +46,8 @@ def main():
     clock = pygame.time.Clock()
     end_it = False
     while (end_it == False):
-        #clock.tick(30)
-        #print(clock.get_fps())
+        clock.tick(30)
+        print(clock.get_fps())
         mainsurface.fill(BLACK)
         myfont = pygame.font.SysFont("Britannic Bold", 100)
         slabel1 = myfont.render("Star Runner", 1, (255, 0, 0))
@@ -112,8 +112,8 @@ def main():
 
 
         clock.tick(30)
-        #print(clock.get_fps())
-        print(len(fireGroup))
+        print(clock.get_fps())
+
 
 
         ypos = random.randint(0, 1200)
