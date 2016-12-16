@@ -112,11 +112,11 @@ def main():
 
 
         clock.tick(30)
-        print(clock.get_fps())
+        #print(clock.get_fps())
 
 
 
-        ypos = random.randint(0, 1200)
+        ypos = random.randint(0, 2400)
         xpos = (900)
         myground = ground.Ground(mainsurface)
         myground.rect.topleft = (xpos, ypos)
@@ -124,7 +124,7 @@ def main():
         mainsurface.blit(myground.image, myground.rect)
 
 
-        ypose = random.randint(0,5000)
+        ypose = random.randint(0, 10000)
         xpose = (900)
         myenemy = enemy.Enemy(mainsurface)
         myenemy.rect.topleft = (xpose, ypose)
@@ -149,10 +149,6 @@ def main():
         if pressed[pygame.K_DOWN]:
             myman.down()
 
-
-
-
-
         myman.collide(groundGroup)
         myman.collide(ememyGroup)
 
@@ -162,10 +158,14 @@ def main():
 
         points = thefire.the_score
 
+
+
+
         mainsurface.fill(WHITE)
         scorefont = pygame.font.SysFont("Britannic Bold", 40)
         scorelable = scorefont.render("Score: {0}".format(points), 1, RED)
 
+        levellable = scorefont.render("Level up!".format(points), 1, RED)
 
 
         mainsurface.blit(mybackround.image, mybackround.rect)
@@ -189,6 +189,9 @@ def main():
         mainsurface.blit(myman.image, myman.rect)
         mainsurface.blit(scorelable, (10, 10))
 
+        if points == 20:
+            mainsurface.blit(levellable, (100, 100))
+            # make harder
 
 
 
