@@ -114,8 +114,6 @@ def main():
         clock.tick(30)
         #print(clock.get_fps())
 
-
-
         ypos = random.randint(0, 2400)
         xpos = (900)
         myground = ground.Ground(mainsurface)
@@ -164,8 +162,8 @@ def main():
         mainsurface.fill(WHITE)
         scorefont = pygame.font.SysFont("Britannic Bold", 40)
         scorelable = scorefont.render("Score: {0}".format(points), 1, RED)
-
         levellable = scorefont.render("Level up!".format(points), 1, RED)
+
 
 
         mainsurface.blit(mybackround.image, mybackround.rect)
