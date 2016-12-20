@@ -18,9 +18,6 @@ class Fire(pygame.sprite.Sprite):
     def fire(self):
         self.rect.left += self.speedx
 
-    def increase(self):
-        self.the_score += 1
-
     def collide_ground(self, spriteGroup):
         if pygame.sprite.spritecollide(self, spriteGroup, True):
             self.rect.top = 4000

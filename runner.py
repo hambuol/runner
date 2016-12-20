@@ -54,14 +54,14 @@ def main():
         slabel2 = myfont.render("Click to Play", 1, (0, 0,255))
 
         ypos = random.randint(0, 1200)
-        xpos = (900)
+        xpos = (820)
         myground = ground.Ground(mainsurface)
         myground.rect.topleft = (xpos, ypos)
         myground.add(groundGroup)
 
 
         ypose = random.randint(0, 5000)
-        xpose = (900)
+        xpose = (820)
         myenemy = enemy.Enemy(mainsurface)
         myenemy.rect.topleft = (xpose, ypose)
         myenemy.add(ememyGroup)
@@ -106,16 +106,14 @@ def main():
 
                 if (event.key == pygame.K_SPACE):
                         thefire.add(fireGroup)
-                        #if len(fireGroup) >= 1:
-                            #print("hi")
                         thefire.rect.topleft = (myman.rect.left + 5, myman.rect.top + 10)
 
 
         clock.tick(30)
-        #print(clock.get_fps())
+        print(clock.get_fps())
 
         ypos = random.randint(0, 2400)
-        xpos = (900)
+        xpos = (920)
         myground = ground.Ground(mainsurface)
         myground.rect.topleft = (xpos, ypos)
         myground.add(groundGroup)
@@ -123,7 +121,7 @@ def main():
 
 
         ypose = random.randint(0, 10000)
-        xpose = (900)
+        xpose = (920)
         myenemy = enemy.Enemy(mainsurface)
         myenemy.rect.topleft = (xpose, ypose)
         myenemy.add(ememyGroup)
@@ -155,16 +153,16 @@ def main():
 
 
         points = thefire.the_score
-
-
-
-
         mainsurface.fill(WHITE)
         scorefont = pygame.font.SysFont("Britannic Bold", 40)
         scorelable = scorefont.render("Score: {0}".format(points), 1, RED)
         levellable = scorefont.render("Level up!".format(points), 1, RED)
 
-
+        lives = myman.lives
+        liveslable = scorefont.render("Health:".format(lives), 1, RED)
+        if lives == 0:
+            pygame.quit()
+            sys.exit()
 
         mainsurface.blit(mybackround.image, mybackround.rect)
         for myend in endGroup:
@@ -186,13 +184,12 @@ def main():
                 thefire.remove(fireGroup)
         mainsurface.blit(myman.image, myman.rect)
         mainsurface.blit(scorelable, (10, 10))
-
+        mainsurface.blit(liveslable, (560, 10))
         if points == 20:
             mainsurface.blit(levellable, (100, 100))
             # make harder
 
-
-
+        pygame.draw.rect(mainsurface, (RED), (670, 18, lives, 15), 0)
 
 
 

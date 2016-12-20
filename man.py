@@ -11,6 +11,7 @@ class Man(pygame.sprite.Sprite):
         self.screen = screen
         self.speedx = 14
         self.speedy = 10
+        self.lives = 100
 
 
     def jump(self):
@@ -64,8 +65,9 @@ class Man(pygame.sprite.Sprite):
 
     def collide(self, spriteGroup):
         if pygame.sprite.spritecollide(self, spriteGroup, False):
-            pygame.quit()
-            sys.exit()
+            self.lives -= 5
+
+
 
             
 
