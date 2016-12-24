@@ -20,3 +20,5 @@ class Enemy(pygame.sprite.Sprite):
         if pygame.sprite.spritecollide(self, spriteGroup, True):
             self.rect.left += 7
 
+    def level_up(self):
+        self.rect.left -= 5

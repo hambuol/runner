@@ -15,13 +15,16 @@ class Ground(pygame.sprite.Sprite):
         self.speedx = 5
         self.speedy = 3
 
-
     def update(self):
         self.rect.left -= self.speedx
+
+    def level_up(self):
+        self.rect.left -= 2
 
 
     def collide(self, spriteGroup):
         pygame.sprite.spritecollide(self, spriteGroup, True)
+
 
 class End(pygame.sprite.Sprite):
         """class sets what is needed for mouth"""
@@ -37,6 +40,7 @@ class End(pygame.sprite.Sprite):
 
         def collide(self, spriteGroup):
             pygame.sprite.spritecollide(self, spriteGroup, True)
+
 
 
 

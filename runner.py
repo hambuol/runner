@@ -151,12 +151,33 @@ def main():
         myend.collide(ememyGroup)
         myend.collide(groundGroup)
 
-
+        level = 1
         points = thefire.the_score
+        if points >= 15:
+            level += 1
+        if points >= 30:
+            level += 1
+        if points >= 45:
+            level += 1
+        if points >= 60:
+            level += 1
+        if points >= 75:
+            level += 1
+        if points >= 90:
+            level += 1
+        if points >= 105:
+            level += 1
+        if points >= 120:
+            level += 1
+        if points >= 135:
+            level += 1
+        if points >= 150:
+            level = "final level"
+
         mainsurface.fill(WHITE)
         scorefont = pygame.font.SysFont("Britannic Bold", 40)
         scorelable = scorefont.render("Score: {0}".format(points), 1, RED)
-        levellable = scorefont.render("Level up!".format(points), 1, RED)
+        levellable = scorefont.render("Level: {}".format(level), 1, RED)
 
         lives = myman.lives
         liveslable = scorefont.render("Health:".format(lives), 1, RED)
@@ -185,20 +206,42 @@ def main():
         mainsurface.blit(myman.image, myman.rect)
         mainsurface.blit(scorelable, (10, 10))
         mainsurface.blit(liveslable, (560, 10))
-        if points == 20:
-            mainsurface.blit(levellable, (100, 100))
-            # make harder
+        mainsurface.blit(levellable, (250, 10))
+
+        if points >= 15:
+            for myground in groundGroup:
+                myground.level_up()
+        if points >= 30:
+            for myenemy in ememyGroup:
+                myenemy.level_up()
+        if points >= 45:
+            for myground in groundGroup:
+                myground.level_up()
+        if points >= 6:
+            for myenemy in ememyGroup:
+                myenemy.level_up()
+        if points >= 75:
+            for myground in groundGroup:
+                myground.level_up()
+        if points >= 90:
+            for myenemy in ememyGroup:
+                myenemy.level_up()
+        if points >= 105:
+            for myground in groundGroup:
+                myground.level_up()
+        if points >= 120:
+            for myenemy in ememyGroup:
+                myenemy.level_up()
+        if points >= 135:
+            for myground in groundGroup:
+                myground.level_up()
+        if points >= 150:
+            pass
+            #special last level
 
         pygame.draw.rect(mainsurface, (RED), (670, 18, lives, 15), 0)
 
 
-
-
-
-
-
-
-
         pygame.display.update()
-
 main()
+
