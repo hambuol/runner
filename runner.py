@@ -50,8 +50,9 @@ def main():
         print(clock.get_fps())
         mainsurface.fill(BLACK)
         myfont = pygame.font.SysFont("Britannic Bold", 100)
+        myfont1 = pygame.font.SysFont("Britannic Bold", 50)
         slabel1 = myfont.render("Star Runner", 1, (255, 0, 0))
-        slabel2 = myfont.render("Click to Play", 1, (0, 0,255))
+        slabel2 = myfont1.render("Click or press space to Play", 1, (0, 0,255))
 
         ypos = random.randint(0, 1200)
         xpos = (820)
@@ -67,7 +68,7 @@ def main():
         myenemy.add(ememyGroup)
         mainsurface.blit(mybackround.image, mybackround.rect)
         mainsurface.blit(slabel1, (200, 100))
-        mainsurface.blit(slabel2, (200, 200))
+        mainsurface.blit(slabel2, (150, 200))
 
 
         for myend in endGroup:
@@ -86,7 +87,7 @@ def main():
 
 
         for event in pygame.event.get():
-            if event.type == MOUSEBUTTONDOWN:
+            if event.type == MOUSEBUTTONDOWN or pygame.key.get_pressed()[pygame.K_SPACE]:
                 for myenemy in ememyGroup:
                     myenemy.remove(ememyGroup)
                 for myground in groundGroup:
@@ -129,7 +130,7 @@ def main():
 
 
         pressed = pygame.key.get_pressed()
-        # moves mouth if key is pressed
+
         if pressed[pygame.K_LEFT]:
             myman.left()
 
@@ -178,12 +179,10 @@ def main():
         scorefont = pygame.font.SysFont("Britannic Bold", 40)
         scorelable = scorefont.render("Score: {0}".format(points), 1, RED)
         levellable = scorefont.render("Level: {}".format(level), 1, RED)
-
+        overlable = myfont.render("Game Over", 1, (255, 0, 0))
+        mainscreenlable = scorefont.render("Press Space to return to home screen", 1, (0, 0, 255))
         lives = myman.lives
         liveslable = scorefont.render("Health:".format(lives), 1, RED)
-        if lives == 0:
-            pygame.quit()
-            sys.exit()
 
         mainsurface.blit(mybackround.image, mybackround.rect)
         for myend in endGroup:
@@ -203,6 +202,15 @@ def main():
             thefire.fire()
             if thefire.collide_ground(groundGroup):
                 thefire.remove(fireGroup)
+
+        if lives == 0:
+            myman.rect.top = 4000
+            myman.rect.left = 4000
+            mainsurface.blit(overlable, (200, 200))
+            mainsurface.blit(mainscreenlable, (120, 275))
+            if pressed[pygame.K_SPACE]:
+                main()
+
         mainsurface.blit(myman.image, myman.rect)
         mainsurface.blit(scorelable, (10, 10))
         mainsurface.blit(liveslable, (560, 10))
@@ -244,4 +252,5 @@ def main():
 
         pygame.display.update()
 main()
+
 
