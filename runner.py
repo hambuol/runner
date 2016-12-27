@@ -4,7 +4,7 @@ import ground
 import enemy
 import fire
 import backround
-import start_screen
+import special
 import random
 import time
 from pygame.locals import *
@@ -26,16 +26,20 @@ def main():
 
     manGroup = pygame.sprite.Group()
     myman = man.Man(mainsurface)
-    myman.rect.topleft = (50,250)
+    myman.rect.topleft = (50, 250)
     myman.add(manGroup)
     mainsurface.blit(myman.image, myman.rect)
 
     endGroup = pygame.sprite.Group()
     myend = ground.End(mainsurface, RED)
-    myend.rect.topleft = (0,-4000)
+    myend.rect.topleft = (0, -4000)
     myend.add(endGroup)
     mainsurface.blit(myend.image, myend.rect)
 
+    starGroup = pygame.sprite.Group()
+    mystar = special.Special(mainsurface)
+    mystar.rect.topleft = (920, random.randint(5, 495))
+    mystar.add(starGroup)
     fireGroup = pygame.sprite.Group()
     thefire = fire.Fire(mainsurface, RED)
 
@@ -44,6 +48,8 @@ def main():
     groundGroup = pygame.sprite.Group()
     thefire = fire.Fire(mainsurface, RED)
     clock = pygame.time.Clock()
+    pygame.mixer.music.load("imperial_march.wav")
+    pygame.mixer.music.play(-1)
     end_it = False
     while (end_it == False):
         clock.tick(30)
@@ -69,6 +75,7 @@ def main():
         mainsurface.blit(mybackround.image, mybackround.rect)
         mainsurface.blit(slabel1, (200, 100))
         mainsurface.blit(slabel2, (150, 200))
+
 
 
         for myend in endGroup:
@@ -112,7 +119,6 @@ def main():
 
         clock.tick(30)
         print(clock.get_fps())
-
         ypos = random.randint(0, 2400)
         xpos = (920)
         myground = ground.Ground(mainsurface)
@@ -148,6 +154,7 @@ def main():
 
         myman.collide(groundGroup)
         myman.collide(ememyGroup)
+
 
         myend.collide(ememyGroup)
         myend.collide(groundGroup)
@@ -202,12 +209,12 @@ def main():
             thefire.fire()
             if thefire.collide_ground(groundGroup):
                 thefire.remove(fireGroup)
-
         if lives == 0:
             myman.rect.top = 4000
             myman.rect.left = 4000
             mainsurface.blit(overlable, (200, 200))
             mainsurface.blit(mainscreenlable, (120, 275))
+            pygame.mixer.music.stop()
             if pressed[pygame.K_SPACE]:
                 main()
 
@@ -225,7 +232,7 @@ def main():
         if points >= 45:
             for myground in groundGroup:
                 myground.level_up()
-        if points >= 6:
+        if points >= 60:
             for myenemy in ememyGroup:
                 myenemy.level_up()
         if points >= 75:
@@ -246,6 +253,11 @@ def main():
         if points >= 150:
             pass
             #special last level
+        if points > 15 and points < 30:
+            mainsurface.blit(mystar.image, mystar.rect)
+            mystar.update()
+            myman.colide_2(starGroup, manGroup)
+
 
         pygame.draw.rect(mainsurface, (RED), (670, 18, lives, 15), 0)
 

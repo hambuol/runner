@@ -1,9 +1,8 @@
 import pygame
-import start_screen
+
 
 
 class Fire(pygame.sprite.Sprite):
-    """class sets what is needed for mouth"""
 
     def __init__(self, screen, color):
         super().__init__()
@@ -13,7 +12,7 @@ class Fire(pygame.sprite.Sprite):
         self.speedx = 40
         self.speedy = -20
         self.the_score = 0
-
+        self.hit = pygame.mixer.Sound("explosion.wav")
 
 
     def fire(self):
@@ -23,11 +22,10 @@ class Fire(pygame.sprite.Sprite):
         if pygame.sprite.spritecollide(self, spriteGroup, True):
             self.rect.top = 4000
             self.the_score += 1
+            self.hit.play()
 
     def collide_enemy(self, spriteGroup):
         pygame.sprite.spritecollide(self, spriteGroup, False)
-
-
 
 
 

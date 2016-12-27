@@ -37,7 +37,7 @@ class End(pygame.sprite.Sprite):
             self.image.fill(color)
             self.rect = self.image.get_rect()
             self.screen = screen
-
+            self.hit = pygame.mixer.Sound("explosion.wav")
         def collide(self, spriteGroup):
             pygame.sprite.spritecollide(self, spriteGroup, True)
 
