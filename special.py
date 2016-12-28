@@ -7,8 +7,6 @@ class Special(pygame.sprite.Sprite):
 
     def __init__(self, screen):
         super().__init__()
-        self.width = 20
-        self.height = 20
         self.image = pygame.image.load("star.png")
         self.rect = self.image.get_rect()
         self.screen = screen

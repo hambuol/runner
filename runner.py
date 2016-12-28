@@ -18,7 +18,6 @@ def main():
     pygame.init()
     mainsurface = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT), 0, 32)
     pygame.display.set_caption("Star Runner")
-
     backroundGroup = pygame.sprite.Group()
     mybackround = backround.Backround(mainsurface)
     mybackround.rect.topleft = (0, 0)
@@ -39,8 +38,7 @@ def main():
 
     starGroup = pygame.sprite.Group()
     mystar = special.Special(mainsurface)
-    mystar.rect.topleft = (920, random.randint(5, 495))
-    mystar.add(starGroup)
+
     fireGroup = pygame.sprite.Group()
     thefire = fire.Fire(mainsurface, RED)
 
@@ -106,6 +104,7 @@ def main():
                 sys.exit()
         pygame.display.update()
         pygame.display.flip()
+
     while True:
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -116,6 +115,13 @@ def main():
                 if (event.key == pygame.K_SPACE):
                         thefire.add(fireGroup)
                         thefire.rect.topleft = (myman.rect.left + 5, myman.rect.top + 10)
+                if (event.key == pygame.K_p):
+                    pygame.mixer.music.pause()
+                if (event.key == pygame.K_u):
+                    pygame.mixer.music.unpause()
+
+
+
 
 
         clock.tick(30)
@@ -283,36 +289,32 @@ def main():
             if thefire.collide_final(finalGroup):
                 thefire.remove(fireGroup)
 
+        if points == 15:
+            mystar.rect.topleft = (920, random.randint(5, 495))
+            mystar.add(starGroup)
 
-            #special last level
-        if points > 15 and points < 30:
+        if points == 45:
+            mystar.rect.topleft = (920, random.randint(5, 495))
+            mystar.add(starGroup)
+
+        if points == 75:
+            mystar.rect.topleft = (920, random.randint(5, 495))
+            mystar.add(starGroup)
+
+        if points == 105:
+            mystar.rect.topleft = (920, random.randint(5, 495))
+            mystar.add(starGroup)
+
+        if points == 135:
+            mystar.rect.topleft = (920, random.randint(5, 495))
+            mystar.add(starGroup)
+
+        for mystar in starGroup:
             mainsurface.blit(mystar.image, mystar.rect)
             mystar.update()
-            myman.colide_2(starGroup, manGroup)
-
-        if points > 45 and points < 60:
-            mainsurface.blit(mystar.image, mystar.rect)
-            mystar.update()
-            myman.colide_2(starGroup, manGroup)
-
-        if points > 75 and points < 90:
-            mainsurface.blit(mystar.image, mystar.rect)
-            mystar.update()
-            myman.colide_2(starGroup, manGroup)
-
-        if points > 105 and points < 120:
-            mainsurface.blit(mystar.image, mystar.rect)
-            mystar.update()
-            myman.colide_2(starGroup, manGroup)
-
-        if points > 135 and points < 150:
-            mainsurface.blit(mystar.image, mystar.rect)
-            mystar.update()
-            myman.colide_2(starGroup, manGroup)
+        myman.colide_2(starGroup, manGroup)
         pygame.draw.rect(mainsurface, (RED), (670, 18, lives, 15), 0)
 
 
         pygame.display.update()
 main()
-
-
