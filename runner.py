@@ -125,7 +125,7 @@ def main():
 
 
         clock.tick(30)
-        print(clock.get_fps())
+        #print(clock.get_fps())
 
         ypos = random.randint(0, 2400)
         xpos = (920)
@@ -314,7 +314,7 @@ def main():
             mystar.update()
         myman.colide_2(starGroup, manGroup)
         pygame.draw.rect(mainsurface, (RED), (670, 18, lives, 15), 0)
-
+        print(lives)
 
         pygame.display.update()
 main()

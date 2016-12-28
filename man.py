@@ -74,7 +74,7 @@ class Man(pygame.sprite.Sprite):
 
     def colide_2(self, spriteGroupa, spriteGroupb):
         if pygame.sprite.groupcollide(spriteGroupa, spriteGroupb, False, False):
-            self.lives = 100
+            self.lives += 50
             self.power_up.play()
 
 
