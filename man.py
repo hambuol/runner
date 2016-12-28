@@ -12,6 +12,7 @@ class Man(pygame.sprite.Sprite):
         self.speedx = 14
         self.speedy = 10
         self.lives = 100
+        self.power_up = pygame.mixer.Sound("Power-Up-KP-1879176533.wav")
 
 
     def jump(self):
@@ -67,10 +68,14 @@ class Man(pygame.sprite.Sprite):
         if pygame.sprite.spritecollide(self, spriteGroup, False):
             self.lives -= 5
 
+    def collide_final(self, spriteGroup):
+        if pygame.sprite.spritecollide(self, spriteGroup, False):
+            self.lives -= 10
+
     def colide_2(self, spriteGroupa, spriteGroupb):
         if pygame.sprite.groupcollide(spriteGroupa, spriteGroupb, False, False):
             self.lives += 100
-
+            self.power_up.play()
 
 
             

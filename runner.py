@@ -6,6 +6,7 @@ import fire
 import backround
 import special
 import random
+import final
 import time
 from pygame.locals import *
 def main():
@@ -43,7 +44,7 @@ def main():
     fireGroup = pygame.sprite.Group()
     thefire = fire.Fire(mainsurface, RED)
 
-
+    finalGroup = pygame.sprite.Group()
     ememyGroup = pygame.sprite.Group()
     groundGroup = pygame.sprite.Group()
     thefire = fire.Fire(mainsurface, RED)
@@ -119,6 +120,7 @@ def main():
 
         clock.tick(30)
         print(clock.get_fps())
+
         ypos = random.randint(0, 2400)
         xpos = (920)
         myground = ground.Ground(mainsurface)
@@ -154,6 +156,7 @@ def main():
 
         myman.collide(groundGroup)
         myman.collide(ememyGroup)
+        myman.collide_final(finalGroup)
 
 
         myend.collide(ememyGroup)
@@ -187,6 +190,7 @@ def main():
         scorelable = scorefont.render("Score: {0}".format(points), 1, RED)
         levellable = scorefont.render("Level: {}".format(level), 1, RED)
         overlable = myfont.render("Game Over", 1, (255, 0, 0))
+        winlable = myfont.render("You Won!", 1, (255, 0, 0))
         mainscreenlable = scorefont.render("Press Space to return to home screen", 1, (0, 0, 255))
         lives = myman.lives
         liveslable = scorefont.render("Health:".format(lives), 1, RED)
@@ -215,6 +219,18 @@ def main():
             mainsurface.blit(overlable, (200, 200))
             mainsurface.blit(mainscreenlable, (120, 275))
             pygame.mixer.music.stop()
+            if pressed[pygame.K_SPACE]:
+                main()
+        win = pygame.mixer.Sound("Ta_Da-SoundBible.wav")
+        if points >= 200:
+            myman.rect.top = 4000
+            myman.rect.left = 4000
+            mainsurface.blit(winlable, (200, 200))
+            mainsurface.blit(mainscreenlable, (120, 275))
+            pygame.mixer.music.stop()
+            win.play()
+            for myfinal in finalGroup:
+                myfinal.remove(finalGroup)
             if pressed[pygame.K_SPACE]:
                 main()
 
@@ -251,14 +267,48 @@ def main():
             for myground in groundGroup:
                 myground.level_up()
         if points >= 150:
-            pass
+            for myenemy in ememyGroup:
+                myenemy.remove(ememyGroup)
+            for myground in groundGroup:
+                myground.remove(groundGroup)
+            y = random.randint(0, 2500)
+            x = (920)
+            myfinal = final.Final(mainsurface)
+            myfinal.rect.topleft = (x, y)
+            myfinal.add(finalGroup)
+            mainsurface.blit(myfinal.image, myfinal.rect)
+            for myfinal in finalGroup:
+                mainsurface.blit(myfinal.image, myfinal.rect)
+                myfinal.update(manGroup)
+            if thefire.collide_final(finalGroup):
+                thefire.remove(fireGroup)
+
+
             #special last level
         if points > 15 and points < 30:
             mainsurface.blit(mystar.image, mystar.rect)
             mystar.update()
             myman.colide_2(starGroup, manGroup)
 
+        if points > 45 and points < 60:
+            mainsurface.blit(mystar.image, mystar.rect)
+            mystar.update()
+            myman.colide_2(starGroup, manGroup)
 
+        if points > 75 and points < 90:
+            mainsurface.blit(mystar.image, mystar.rect)
+            mystar.update()
+            myman.colide_2(starGroup, manGroup)
+
+        if points > 105 and points < 120:
+            mainsurface.blit(mystar.image, mystar.rect)
+            mystar.update()
+            myman.colide_2(starGroup, manGroup)
+
+        if points > 135 and points < 150:
+            mainsurface.blit(mystar.image, mystar.rect)
+            mystar.update()
+            myman.colide_2(starGroup, manGroup)
         pygame.draw.rect(mainsurface, (RED), (670, 18, lives, 15), 0)
 
 
