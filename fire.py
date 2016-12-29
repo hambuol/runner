@@ -21,7 +21,7 @@ class Fire(pygame.sprite.Sprite):
     def collide_ground(self, spriteGroup):
         if pygame.sprite.spritecollide(self, spriteGroup, True):
             self.rect.top = 4000
-            self.the_score += 15
+            self.the_score += 1
             self.hit.play()
 
     def collide_final(self, spriteGroup):

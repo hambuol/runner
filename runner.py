@@ -189,7 +189,7 @@ def main():
         if points >= 135:
             level += 1
         if points >= 150:
-            level = "final level"
+            level = "Final"
 
         mainsurface.fill(WHITE)
         scorefont = pygame.font.SysFont("Britannic Bold", 40)
@@ -219,14 +219,14 @@ def main():
             thefire.fire()
             if thefire.collide_ground(groundGroup):
                 thefire.remove(fireGroup)
-        if lives == 0:
-            myman.rect.top = 4000
-            myman.rect.left = 4000
-            mainsurface.blit(overlable, (200, 200))
-            mainsurface.blit(mainscreenlable, (120, 275))
-            pygame.mixer.music.stop()
-            if pressed[pygame.K_SPACE]:
-                main()
+        #if lives == 0:
+            #myman.rect.top = 4000
+            #myman.rect.left = 4000
+            #mainsurface.blit(overlable, (200, 200))
+            #mainsurface.blit(mainscreenlable, (120, 275))
+            #pygame.mixer.music.stop()
+            #if pressed[pygame.K_SPACE]:
+                #main()
         win = pygame.mixer.Sound("Ta_Da-SoundBible.wav")
         if points >= 200:
             myman.rect.top = 4000
@@ -242,8 +242,8 @@ def main():
 
         mainsurface.blit(myman.image, myman.rect)
         mainsurface.blit(scorelable, (10, 10))
-        mainsurface.blit(liveslable, (560, 10))
-        mainsurface.blit(levellable, (250, 10))
+        mainsurface.blit(liveslable, (10, 473))
+        mainsurface.blit(levellable, (630, 10))
 
         if points >= 15:
             for myground in groundGroup:
@@ -313,8 +313,17 @@ def main():
             mainsurface.blit(mystar.image, mystar.rect)
             mystar.update()
         myman.colide_2(starGroup, manGroup)
-        pygame.draw.rect(mainsurface, (RED), (670, 18, lives, 15), 0)
+        pygame.draw.rect(mainsurface, (RED), (115, 480, lives, 15), 0)
         print(lives)
+
+        if lives == 0 or lives < 0:
+            myman.rect.top = 4000
+            myman.rect.left = 4000
+            mainsurface.blit(overlable, (200, 200))
+            mainsurface.blit(mainscreenlable, (120, 275))
+            pygame.mixer.music.stop()
+            if pressed[pygame.K_SPACE]:
+                main()
 
         pygame.display.update()
 main()
