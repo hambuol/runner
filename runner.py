@@ -99,9 +99,14 @@ def main():
                 for myground in groundGroup:
                     myground.remove(groundGroup)
                 end_it = True
-            elif event.type == QUIT:
+            if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
+            if (event.type == pygame.KEYDOWN): 
+                if (event.key == pygame.K_p):
+                    pygame.mixer.music.pause()
+                if (event.key == pygame.K_u):
+                    pygame.mixer.music.unpause()
         pygame.display.update()
         pygame.display.flip()
 
