@@ -7,7 +7,6 @@ import backround
 import special
 import random
 import final
-import time
 from pygame.locals import *
 def main():
     SCREEN_WIDTH = 800
@@ -222,16 +221,9 @@ def main():
         for thefire in fireGroup:
             mainsurface.blit(thefire.image, thefire.rect)
             thefire.fire()
-            if thefire.collide_ground(groundGroup):
-                thefire.remove(fireGroup)
-        #if lives == 0:
-            #myman.rect.top = 4000
-            #myman.rect.left = 4000
-            #mainsurface.blit(overlable, (200, 200))
-            #mainsurface.blit(mainscreenlable, (120, 275))
-            #pygame.mixer.music.stop()
-            #if pressed[pygame.K_SPACE]:
-                #main()
+            thefire.collide_ground(groundGroup)
+
+
         win = pygame.mixer.Sound("Ta_Da-SoundBible.wav")
         if points >= 200:
             myman.rect.top = 4000
@@ -283,7 +275,7 @@ def main():
             for myground in groundGroup:
                 myground.remove(groundGroup)
             y = random.randint(0, 2500)
-            x = (920)
+            x = 920
             myfinal = final.Final(mainsurface)
             myfinal.rect.topleft = (x, y)
             myfinal.add(finalGroup)
