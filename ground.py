@@ -27,7 +27,7 @@ class Ground(pygame.sprite.Sprite):
 
 
 class End(pygame.sprite.Sprite):
-        """class sets what is needed for mouth"""
+        """ """
 
         def __init__(self, screen, color):
             super().__init__()

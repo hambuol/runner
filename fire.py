@@ -14,7 +14,7 @@ class Fire(pygame.sprite.Sprite):
         self.the_score = 0
         self.hit = pygame.mixer.Sound("explosion.wav")
         self.hit_final = pygame.mixer.Sound("Scary_Scream-SoundBible.wav")
-        
+
 
     def fire(self):
         self.rect.left += self.speedx

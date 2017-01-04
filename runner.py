@@ -1,4 +1,4 @@
-import pygame,sys
+import pygame, sys
 import man
 import ground
 import enemy
@@ -31,7 +31,7 @@ def main():
 
     endGroup = pygame.sprite.Group()
     myend = ground.End(mainsurface, RED)
-    myend.rect.topleft = (0, -4000)
+    myend.rect.topleft = (-1, -4000)
     myend.add(endGroup)
     mainsurface.blit(myend.image, myend.rect)
 
