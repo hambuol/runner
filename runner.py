@@ -1,3 +1,8 @@
+# written by oliver hamburger
+# program is an original game called "star runner"
+# last modified 1/5/17
+
+# imports class files and needed moduels
 import pygame, sys
 import man
 import ground
@@ -8,33 +13,41 @@ import special
 import random
 import final
 from pygame.locals import *
+
+
 def main():
+    # constants throught program
     SCREEN_WIDTH = 800
     SCREEN_HEIGHT = 500
     BLACK = (0, 0, 0)
     WHITE = (255, 255, 255)
     RED = (255, 0, 0)
+
+
     pygame.init()
     mainsurface = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT), 0, 32)
     pygame.display.set_caption("Star Runner")
+
+    # creates group, adds sprite to group and sets the position of the background
     backroundGroup = pygame.sprite.Group()
     mybackround = backround.Backround(mainsurface)
     mybackround.rect.topleft = (0, 0)
     mybackround.add(backroundGroup)
-    mainsurface.blit(mybackround.image, mybackround.rect)
 
+    # creates group, adds sprite to group and sets the position of the spaceship
     manGroup = pygame.sprite.Group()
     myman = man.Man(mainsurface)
     myman.rect.topleft = (50, 250)
     myman.add(manGroup)
-    mainsurface.blit(myman.image, myman.rect)
 
+    # creates group, adds sprite to group and sets the position of
+    # the end line to delete sprites that are not on the screen
     endGroup = pygame.sprite.Group()
     myend = ground.End(mainsurface, RED)
     myend.rect.topleft = (-1, -4000)
     myend.add(endGroup)
-    mainsurface.blit(myend.image, myend.rect)
 
+    # creates group and defines mystar 
     starGroup = pygame.sprite.Group()
     mystar = special.Special(mainsurface)
 
