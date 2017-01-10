@@ -2,7 +2,7 @@ import pygame
 
 
 class Backround(pygame.sprite.Sprite):
-    """class sets what is needed for mouth"""
+    """class sets what is needed for backround"""
 
     def __init__(self, screen):
         super().__init__()

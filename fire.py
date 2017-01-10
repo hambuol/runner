@@ -1,8 +1,8 @@
 import pygame
 
 
-
 class Fire(pygame.sprite.Sprite):
+    """class sets what is needed for projectile/fire"""
 
     def __init__(self, screen, color):
         super().__init__()
@@ -17,23 +17,35 @@ class Fire(pygame.sprite.Sprite):
 
 
     def fire(self):
+        """
+        adds movement to fire sprite
+        :return: none
+        """
         self.rect.left += self.speedx
 
     def collide_ground(self, spriteGroup):
+        """
+        deletes sprite that it collides with, adds to points and moves the fire sprite off the screen
+        :param spriteGroup:
+        :return: none
+        """
         if pygame.sprite.spritecollide(self, spriteGroup, True):
             self.rect.top = 4000
             self.the_score += 1
             self.hit.play()
 
     def collide_final(self, spriteGroup):
+        """
+        deletes sprite that it collides with, adds to points and moves the fire sprite off the screen
+        :param spriteGroup:
+        :return: none
+        """
         if pygame.sprite.spritecollide(self, spriteGroup, True):
             self.rect.top = 4000
             self.the_score += 1
             self.hit_final.play()
 
 
-    def collide_enemy(self, spriteGroup):
-        pygame.sprite.spritecollide(self, spriteGroup, False)
 
 
 

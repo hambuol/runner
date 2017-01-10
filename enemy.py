@@ -2,7 +2,7 @@ import pygame
 
 
 class Enemy(pygame.sprite.Sprite):
-    """class sets what is needed for mouth"""
+    """class sets what is needed for rockets/enemy"""
 
     def __init__(self, screen):
         super().__init__()
@@ -16,9 +16,18 @@ class Enemy(pygame.sprite.Sprite):
 
 
     def update(self, spriteGroup):
+        """
+        updates enemy sprite and slows down speed if it hit anything
+        :param spriteGroup:
+        :return: none
+        """
         self.rect.left -= self.speedx
         if pygame.sprite.spritecollide(self, spriteGroup, True):
             self.rect.left += 7
 
     def level_up(self):
+        """
+        speeds up enemy sprite for the next level
+        :return: none
+        """
         self.rect.left -= 5

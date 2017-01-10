@@ -1,9 +1,8 @@
 import pygame
-import fire
 
 
 class Special(pygame.sprite.Sprite):
-    """class sets what is needed for mouth"""
+    """class sets what is needed for power-up star/special"""
 
     def __init__(self, screen):
         super().__init__()
@@ -15,6 +14,10 @@ class Special(pygame.sprite.Sprite):
 
 
     def update(self):
+        """
+        updates special sprite for movement
+        :return: none
+        """
         self.rect.left -= self.speedx
 
 

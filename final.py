@@ -2,6 +2,7 @@ import pygame
 
 
 class Final(pygame.sprite.Sprite):
+    """class sets what is needed for final"""
 
     def __init__(self, screen):
         super().__init__()
@@ -15,9 +16,13 @@ class Final(pygame.sprite.Sprite):
 
 
     def update(self, spriteGroup):
+        """
+        updates movement of final sprite
+        :param spriteGroup:
+        :return: none
+        """
         self.rect.left -= self.speedx
-        if pygame.sprite.spritecollide(self, spriteGroup, True):
-            self.rect.left += 7
+
 
 
 

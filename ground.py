@@ -1,9 +1,8 @@
 import pygame
 
 
-
 class Ground(pygame.sprite.Sprite):
-    """class sets what is needed for mouth"""
+    """class sets what is needed for ground/asteroids"""
 
     def __init__(self, screen):
         super().__init__()
@@ -16,18 +15,21 @@ class Ground(pygame.sprite.Sprite):
         self.speedy = 3
 
     def update(self):
+        """
+        updates the movement of the ateroids
+        :return: none
+        """
         self.rect.left -= self.speedx
 
     def level_up(self):
+        """
+        makes speed of asteroids faster for next level
+        :return: none
+        """
         self.rect.left -= 2
 
-
-    def collide(self, spriteGroup):
-        pygame.sprite.spritecollide(self, spriteGroup, True)
-
-
 class End(pygame.sprite.Sprite):
-        """ """
+        """class sets what is needed for mouth"""
 
         def __init__(self, screen, color):
             super().__init__()
@@ -38,7 +40,13 @@ class End(pygame.sprite.Sprite):
             self.rect = self.image.get_rect()
             self.screen = screen
             self.hit = pygame.mixer.Sound("explosion.wav")
+
         def collide(self, spriteGroup):
+            """
+            collide function deletes sprites if it collides with end sprite
+            :param spriteGroup:
+            :return:
+            """
             pygame.sprite.spritecollide(self, spriteGroup, True)
 
 
