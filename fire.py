@@ -2,7 +2,8 @@ import pygame
 
 
 class Fire(pygame.sprite.Sprite):
-    """class sets what is needed for projectile/fire"""
+    """class sets what is needed for projectile/fire
+    sounds from https://www.freesound.org"""
 
     def __init__(self, screen, color):
         super().__init__()

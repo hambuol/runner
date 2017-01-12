@@ -63,6 +63,7 @@ def main():
     clock = pygame.time.Clock()
 
     # loads the music mixer and plays the backround music in a loop
+    # music from http://www.thesoundarchive.com/star-wars.asp
     pygame.mixer.music.load("imperial_march.wav")
     pygame.mixer.music.play(-1)
 
@@ -271,6 +272,7 @@ def main():
             thefire.collide_ground(groundGroup)
 
         # does needed actions if player wins the game
+        # sound from https://www.freesound.org
         win = pygame.mixer.Sound("Ta_Da-SoundBible.wav")
         if points >= 200:
             myman.rect.top = 4000
