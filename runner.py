@@ -370,5 +370,6 @@ def main():
             if pressed[pygame.K_SPACE]:
                 main()
 
+
         pygame.display.update()
 main()

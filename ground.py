@@ -2,13 +2,14 @@ import pygame
 
 
 class Ground(pygame.sprite.Sprite):
-    """class sets what is needed for ground/asteroids"""
+    """class sets what is needed for ground/asteroids
+    image from https://pixabay.com/en/moon-star-night-sky-night-sky-1647391/"""
 
     def __init__(self, screen):
         super().__init__()
         self.width = 80
         self.height = 10
-        self.image = pygame.image.load("asteroid.png")
+        self.image = pygame.image.load("ast.png")
         self.rect = self.image.get_rect()
         self.screen = screen
         self.speedx = 5
