@@ -1,6 +1,6 @@
 # written by oliver hamburger
 # program is an original game called "star runner"
-# last modified 1/5/17
+# last modified 1/19/17
 
 # imports class files and needed moduels
 import pygame, sys
